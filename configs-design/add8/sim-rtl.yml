@@ -1,0 +1,5 @@
+# RTL Simulation
+
+sim.inputs:
+  level: "rtl"
+  input_files: ['src/add8.v', 'src/add8_tb.v']
