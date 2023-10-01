@@ -7,7 +7,7 @@ power.inputs:
   input_files: ["src/add8.v"]
   waveforms: ["build-sky130-cm/add8/sim-rtl-rundir/output.fsdb"]
   report_configs:
-    - waveform_path: "build-sky130-cm/pass/sim-rtl-rundir/output.fsdb"
+    - waveform_path: "build-sky130-cm/add8/sim-rtl-rundir/output.fsdb"
       # specify either interval_size or toggle_signal+num_toggles
       # interval_size: 2.5ns
       toggle_signal: clock

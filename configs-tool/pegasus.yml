@@ -1,4 +1,0 @@
-# Cadence Pegasus DRC/LVS
-
-vlsi.core.drc_tool: "hammer.drc.pegasus"
-vlsi.core.lvs_tool: "hammer.lvs.pegasus"
