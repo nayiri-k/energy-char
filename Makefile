@@ -33,8 +33,6 @@ PROJ_YMLS           ?= $(PDK_CONF) $(TOOLS_CONF) $(DESIGN_CONF) $(DESIGN_PDK_CON
 HAMMER_EXTRA_ARGS   ?= $(foreach conf, $(PROJ_YMLS), -p $(conf)) $(args)
 
 
-
-
 HAMMER_D_MK = $(OBJ_DIR)/hammer.d
 
 build: $(HAMMER_D_MK)
@@ -43,3 +41,15 @@ $(HAMMER_D_MK):
 	hammer-vlsi --obj_dir $(OBJ_DIR) -e $(ENV_YML) $(HAMMER_EXTRA_ARGS) build
 
 -include $(HAMMER_D_MK)
+
+.PHONY: clean_log
+clean_log:
+	rm *.log
+
+.PHONY: clean_generated
+clean_generated:
+	rm generated-src/add8-* generated-configs/*
+
+.PHONY: clean_power_reports
+clean_power_reports:
+	rm $(OBJ_DIR)/power-rtl-rundir/reports/$(design)*
