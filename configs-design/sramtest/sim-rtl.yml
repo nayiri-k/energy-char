@@ -1,0 +1,5 @@
+# RTL Simulation
+
+sim.inputs:
+  level: "rtl"
+  input_files: ['src/sramtest.v', 'src/sramtest_tb.v']
