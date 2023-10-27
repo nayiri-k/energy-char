@@ -1,22 +1,22 @@
 # Specify clock signals
 vlsi.inputs.clocks: [
-  {name: "clock", period: "7ns", uncertainty: "100ps"}
+  {name: "clock", period: "1ns", uncertainty: "10ps"}
 ]
 
 sim.inputs:
-  defines: ["CLOCK_PERIOD=7"]
+  defines: ["CLOCK_PERIOD=1"]
   defines_meta: "append"
   options: ["-timescale=1ns/10ps"]
   options_meta: append
 
 # Placement Constraints
 vlsi.inputs.placement_constraints:
-  - path: "sramtest"
+  - path: "add8"
     type: toplevel
     x: 0
     y: 0
-    width: 100
-    height: 100
+    width: 10
+    height: 10
     margins:
       left: 0
       right: 0

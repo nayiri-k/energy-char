@@ -15,9 +15,22 @@ module sramtest (
   input [DATA_WIDTH-1:0]  din; // data in
   output [DATA_WIDTH-1:0] dout; // data out
 
-sram22_64x4m4w2 mem0 (
-  .clk(clock),.we(we),.wmask(wmask),
-  .addr(addr),.din(din),.dout(dout)
+  // need these internal registers for sramtest module to synthesize properly
+  reg  we_reg; // write enable
+  reg [WMASK_WIDTH-1:0] wmask_reg; // write mask
+  reg [ADDR_WIDTH-1:0]  addr_reg; // address
+  reg [DATA_WIDTH-1:0]  din_reg; // data in
+  
+  always@(posedge clock) begin
+      we_reg <= we;
+      wmask_reg <= wmask;
+      addr_reg <= addr;
+      din_reg <= din;
+  end
+
+  sram22_64x4m4w2 mem0 (
+  .clk(clock),.we(we_reg),.wmask(wmask_reg),
+  .addr(addr_reg),.din(din_reg),.dout(dout)
   );
 
 endmodule

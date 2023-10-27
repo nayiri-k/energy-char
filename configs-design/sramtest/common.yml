@@ -19,7 +19,9 @@ power.inputs:
   tb_dut: "sramtest_dut"
 
 vlsi.inputs.delays: [
-  {name: "in0", clock: "clock", delay: "1", direction: "input"},
-  {name: "in1", clock: "clock", delay: "1", direction: "input"},
-  {name: "out", clock: "clock", delay: "1", direction: "output"}
+  {name: "we", clock: "clock", delay: "1", direction: "input"},
+  {name: "wmask", clock: "clock", delay: "1", direction: "input"},
+  {name: "addr", clock: "clock", delay: "1", direction: "input"},
+  {name: "din", clock: "clock", delay: "1", direction: "input"},
+  {name: "dout", clock: "clock", delay: "1", direction: "output"}
 ]

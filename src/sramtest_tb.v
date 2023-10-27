@@ -24,34 +24,40 @@ module sramtest_tb;
 
     initial begin
         // reset - SRAM behavioral verilog resets all values to 0
+        din = {DATA_WIDTH{'d13}};
+        wmask = {DATA_WIDTH{1'b1}};
+        addr = {DATA_WIDTH{'b0}};
+        we = 0'b0;
 
         // load vals
+        @(negedge clk);
+
+        // enable SRAM write
+        we = 1'b1;
+
+        @(posedge clk); // we --> we_reg in sramtest
+
         @(negedge clk);
 
         $fsdbDumpfile("output.fsdb");
         $fsdbDumpvars("+all");
         $fsdbDumpon;
 
-        din = {DATA_WIDTH{'d13}};
-        we = 1'b1;
-        wmask = {DATA_WIDTH{1'b1}}; // TODO: this generates all 1's I think?
-        addr = {DATA_WIDTH{'b0}};
-
         // perform SRAM write
         @(posedge clk);
-        
 
-        // finish
+        // stop dumping
         @(negedge clk);
         $display("Wrote %d to address %d",din,addr);
-
         $fsdbDumpoff;
 
         // sanity check: re-read same value
-        we = 1'b0;
-        @(negedge clk);
+        we = 1'b0; // enable SRAM read
+        @(posedge clk); // we --> we_reg in sramtest
+        @(posedge clk); // perform SRAM read
+        @(negedge clk); // read out data
         $display("Read %d from address %d",dout,addr);
-
+        // $fsdbDumpoff;
         $finish;
     end
 

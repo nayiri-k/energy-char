@@ -1,0 +1,7 @@
+# Post-PAR Simulation
+
+sim.inputs:
+  level: "syn"
+  input_files: ["src/mult8_tb.v"]
+  input_files_meta: append
+  timing_annotated: true
