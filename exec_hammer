@@ -1,12 +1,43 @@
 #!/bin/bash
 
+#cmds="hammer_cmds"
+#
+#exec_in_background() {
+#  echo "Executing: $1"
+#  eval "$1"
+#}
+#
+#while IFS= read -r line; do
+#  exec_in_background "$line" &
+#done < "$cmds"
+#
+#wait
+
+if [ "$#" -ne 1 ]; then
+  batch_size=4
+else
+  batch_size="$1"
+fi
+
 cmds="hammer_cmds"
 
-exec_in_background() {
-  echo "Executing: $1"
-  eval "$1"
-}
+line_cnt=0
+batch=()
 
 while IFS= read -r line; do
-  exec_in_background "$line" &
+  batch+=("$line")
+  line_cnt=$((line_cnt+1))
+  if [ "$line_cnt" -eq "$batch_size" ]; then
+    for line in "${batch[@]}"; do
+      eval "$line" &
+    done
+    wait
+    batch=()
+    line_cnt=0
+  fi
 done < "$cmds"
+
+for line in "${batch[@]}"; do
+  eval "$line" &
+done
+wait
