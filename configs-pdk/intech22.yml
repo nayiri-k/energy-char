@@ -1,0 +1,24 @@
+vlsi.core.technology: "hammer.intech22"
+
+vlsi.core.sram_generator_tool: "hammer.technology.intech22.sram_compiler"
+
+
+# Pin placement constraints
+vlsi.inputs.pin_mode: generated
+vlsi.inputs.pin.generate_mode: semi_auto
+vlsi.inputs.pin.assignments: [
+  {pins: "*", layers: [m3, m5], side: top}
+]
+
+# TODO: _meta configs aren't propagated into action output configs, so tech/tool plugin _meta's are lost
+# ex. flags below are lost during sim-syn/par (but not sim-rtl)
+sim.inputs:
+  defines: [
+    "INTCNOPWR",         # std-cell no power pins
+    "INTC_NO_PWR_PINS", # srams no power pins
+    "INTC_EMULATION",    # don't include UPF
+    "INTEL_NO_PWR_PINS",
+    "INTEL_EMULATION",    # don't include UPF
+    "INTC_FUNCTIONAL",
+    ]
+  defines_meta: 'append'

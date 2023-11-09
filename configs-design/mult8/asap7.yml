@@ -1,0 +1,24 @@
+# Specify clock signals
+vlsi.inputs.clocks: [
+  {name: "clock", period: "5ns", uncertainty: "0.1ns"}
+]
+
+sim.inputs:
+  defines: ["CLOCK_PERIOD=5"]
+  defines_meta: "append"
+  options: ["-timescale=1ns/10ps"]
+  options_meta: append
+
+# Tool options.
+vlsi.inputs.placement_constraints:
+  - path: "mult8"
+    type: toplevel
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+    margins:
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
