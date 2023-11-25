@@ -5,7 +5,7 @@ vlsi.inputs.pin_mode: generated
 vlsi.inputs.pin.generate_mode: semi_auto
 vlsi.inputs.pin.assignments: [
   {pins: "*", layers: ["met4"], side: "bottom"}
-]
+ ]
 
 # TODO: _meta configs aren't propagated into action output configs, so tech/tool plugin _meta's are lost
 # ex. flags below are lost during sim-syn/par (but not sim-rtl)
@@ -16,5 +16,6 @@ sim.inputs:
 # SRAM Compiler compiler options
 vlsi.core.sram_generator_tool: "hammer.technology.sky130.sram_compiler"
 # Specify this since we are not using macrocompiler
-vlsi.inputs.sram_parameters: "../hammer/hammer/technology/sky130/sram-cache.json"
+# vlsi.inputs.sram_parameters: "../hammer/hammer/technology/sky130/sram-cache.json"
+vlsi.inputs.sram_parameters: "/bwrcq/scratch/alexvolkov/hammer/hammer/technology/sky130/sram-cache.json"
 vlsi.inputs.sram_parameters_meta: ["prependlocal", "transclude", "json2list"]

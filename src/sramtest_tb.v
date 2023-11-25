@@ -27,7 +27,7 @@ module sramtest_tb;
         din = {DATA_WIDTH{'d13}};
         wmask = {DATA_WIDTH{1'b1}};
         addr = {DATA_WIDTH{'b0}};
-        we = 0'b0;
+        we = 1'b0;
 
         // load vals
         @(negedge clk);
