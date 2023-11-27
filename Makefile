@@ -3,7 +3,7 @@ vlsi_dir=$(abspath .)
 
 
 # minimal flow configuration variables
-design              ?= add8
+design              ?= sramtest
 pdk                 ?= sky130
 tools               ?= cm
 env                 ?= bwrc
@@ -18,6 +18,10 @@ OBJ_DIR             ?= $(vlsi_dir)/build-$(pdk)-$(tools)/$(design)
 ENV_YML             ?= configs-env/$(env)-env.yml
 PDK_CONF            ?= configs-pdk/$(pdk).yml
 TOOLS_CONF          ?= configs-tool/$(tools).yml
+
+# generated dirs
+GEN_SRC_DIR         ?= $(vlsi_dir)/generated-src
+GEN_CONFIGS_DIR        ?= $(vlsi_dir)/generated-configs
 
 # design-specific overrides of default configs
 DESIGN_CONF         ?= configs-design/$(design)/common.yml
@@ -48,3 +52,9 @@ $(HAMMER_D_MK): $(SRAM_CONF)
 $(SRAM_CONF) srams:
 	hammer-vlsi --obj_dir $(OBJ_DIR) -e $(ENV_YML) $(foreach conf, $(PROJ_YMLS), -p $(conf)) sram_generator
 	cp output.json $(SRAM_CONF)
+
+clean-log:
+	rm *.log
+
+clean-generated:
+	rm -rf $(GEN_SRC_DIR) $(GEN_CONFIGS_DIR)

@@ -1,0 +1,31 @@
+vlsi.core.power_tool: "hammer.power.joules"
+
+sim.inputs:
+  top_module: "sramtest"
+  tb_name:
+  tb_dut: "sramtest_dut"
+  input_files:
+  defines: ["CLOCK_PERIOD=7"]
+  defines_meta: "append"
+  options: ['-timescale=1ns/10ps']
+  options_meta: "append"
+
+power.inputs:
+  level: "rtl"
+  input_files: ["src/sramtest.v"]
+  top_module: "sramtest"
+  tb_name:
+  tb_dut: "sramtest_dut"
+  waveforms:
+  report_configs:
+    - waveform_path:
+      inst: /sramtest/mem0
+      # specify either interval_size or toggle_signal+num_toggles
+      # interval_size: 2.5ns
+      levels: 2
+      report_name:
+      toggle_signal: clock
+      num_toggles: 1
+      output_formats:
+      - report
+      - ppa
