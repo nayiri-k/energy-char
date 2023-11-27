@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 1 ]; then
-  batch_size=4
+  batch_size=1
 else
   batch_size="$1"
 fi
